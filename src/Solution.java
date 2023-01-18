@@ -1,56 +1,74 @@
 class Solution{
     public ListNode addTwoNumbers(ListNode l1, ListNode l2){
         ListNode l3 = new ListNode();
+        ListNode head = l3;
+
         boolean flag10 = false;
-        l3 = l1;
 
         Boolean flag = true;
         int carry =0;
+
+
         int counter =0;
 
+
         while(flag){
+            //adding l3 value
+            //checking if is less than 10
+
+            if(l1 == null){
+                l1 = new ListNode(0);}
+            if(l2 == null){
+                l2 = new ListNode(0);		}
 
             //variable for carry
             counter++;
 
             //debuggin
             int add = l1.val+l2.val+carry;
+
             int assinged = 0 ;
 
-            System.out.print("loop:"+counter);
-            System.out.print("\t the number is "+add+"\n");
+            //System.out.print("loop:"+counter);
+            //System.out.print("\t the number is "+add+"\n");
 
-            if(add>9 && l1.next!= null )
-            {	System.out.println("\n\t greater than10");
+            if(add>9 )
+            {	//System.out.println("\n\t greater than10");
                 assinged = l1.val + l2.val-10+carry;
-                System.out.println("\n \t assinged:"+assinged);
+                //System.out.println("\n \t assinged:"+assinged);
                 carry =1;
+                if(l1.next == null){
+                    l1.next  = new ListNode(0);
+                }
             }
 
 
             else{
-                System.out.println("\tless than 10");
+                //System.out.println("\tless than 10");
                 assinged = l1.val + l2.val +carry;
-                System.out.println("\n \t assinged:"+assinged);
+                //System.out.println("\n \t assinged:"+assinged);
                 carry =0;
 
             }
 
 
-            l1.val = assinged;
+            l3.val = assinged;
 
             //this checks for the null
-            if(l1.next !=  null)
+            if(l1.next !=  null || l2.next!=null)
             {
                 l1 = l1.next;
                 l2 = l2.next;
+                l3.next = new ListNode();
+                l3 = l3.next;
 
             }
             else{
+                System.out.println("exiting Both are null");
                 flag = false;
             }
         }
-        return l3;
+        return head;
     }
 
 
